@@ -1,0 +1,59 @@
+@charset 'UTF-8';
+* {
+	font-family: Arial Helvetica Sans-Serif;
+	font-size: 1em;
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	background-color: #00C1FF;
+	text-align: center;
+}
+section {
+	min-height: 86.5%;
+}
+section div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+section div.recBac {
+	display: block;
+	text-align: left;
+}
+section div.envBac {
+	display: block;
+	text-align: right;
+}
+section p {
+	background-color: white;
+	border-radius: 0.8em;
+	display: inline-block;
+	font-weight: 400;
+	line-height: 1.3em;
+	max-width: 85%;
+	padding: 10px;
+}
+section div.envBac p {
+	background-color: #B5F2FF;
+	margin-right: 10px;
+}
+section div.recBac p {
+	margin-left: 10px;
+}
+input#mensagem {
+	border-radius: 1.4em;
+	border-style: none;
+	height: 3em;
+	text-align: center;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	width: 80%;
+}
+input#enviar {
+	background-color: white;
+	border-radius: 50%;
+	border-style: none;
+	height: 3em;
+	margin-left: 2%;
+	width: 3em;
+}
