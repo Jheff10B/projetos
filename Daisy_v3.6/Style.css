@@ -1,11 +1,12 @@
 @charset 'UTF-8';
 * {
-	font-family: Arial Helvetica Sans-Serif;
+	font-family: Arial "Sans-Serif";
 	font-size: 1em;
 	margin: 0px;
 	padding: 0px;
 }
 body {
+	font-family: arial;
 	background-color: #00C1FF;
 	text-align: center;
 }

@@ -2,6 +2,11 @@
 // (27/10/2021)
 // Dia Que Eu Terminei Ela
 // undefined
+document.addEventListener('keypress', function(e){
+    if(e.which == 13){
+      Enviar();
+    }
+  }, false);
 var topo = document.getElementById("topo")
 var section = document.getElementsByTagName("section")[0]
 var men = document.getElementById("mensagem")
