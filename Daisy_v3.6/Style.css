@@ -11,7 +11,9 @@ body {
 	text-align: center;
 }
 section {
-	min-height: 86.5%;
+	min-height: 86.5vh;
+	max-width: 600px;
+	margin: auto;
 }
 section div {
 	margin-top: 5px;
@@ -49,6 +51,7 @@ input#mensagem {
 	margin-bottom: 15px;
 	margin-top: 10px;
 	width: 80%;
+	max-width: 508px;
 }
 input#enviar {
 	background-color: white;

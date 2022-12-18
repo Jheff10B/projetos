@@ -10,6 +10,8 @@ document.addEventListener('keypress', function(e){
 var topo = document.getElementById("topo")
 var section = document.getElementsByTagName("section")[0]
 var men = document.getElementById("mensagem")
+men.focus()
+var body = document.getElementsByTagName("body")[0]
 var menCon = ""
 var dadSal = JSON.parse(localStorage.getItem("dadSal"))
 var frasesSal = JSON.parse(localStorage.getItem("frasesSal"))
@@ -17,6 +19,8 @@ var vocabularioSal = JSON.parse(localStorage.getItem("vocabularioSal"))
 var entradasSal = JSON.parse(localStorage.getItem("entradasSal"))
 var saidasSal = JSON.parse(localStorage.getItem("saidasSal"))
 var vez = null
+var vis = true
+var dadoRes = ""
 var menSel = []
 let entradas = []
 let saidas = []
@@ -358,7 +362,6 @@ let vocabulario = [
     "volte"
 ]
 if (dadSal != false) {
-
     ///Entradas
     let e1 = ["eu tô bem e vc?"]
     let e2 = ["tudo bem?",
@@ -610,8 +613,8 @@ if (dadSal != false) {
     dadSal = true
     localStorage.setItem("dadSal", JSON.stringify(dadSal))
 }
-/*Unir()
-Carregar()*/
+Unir()
+Carregar()
 Rolar()
 function Rolar() {
 let height = body.scrollHeight
@@ -633,8 +636,8 @@ function Enviar() {
         men.value = ""
         men.focus()
         setTimeout(function() {
-           /* Voc()
-            PalPro()*/
+            Voc()
+            PalPro()
             Rolar()
         }, 100)
     }
@@ -654,7 +657,7 @@ function Reformatar() {
             menCon += " "
         }
     }
-}/*
+}
 function Unir() {
     for (let pos in saidas) {
         for (let po in saidas) {
@@ -722,71 +725,73 @@ function Carregar() {
         }
     }
 }
-function Contar() {
-    switch (menSel[1]) {
-        case "+":
-            var t = `${Number (menSel[0]) + Number(menSel[2])}`
-            break
-        case "-":
-            var t = `${Number(menSel[0]) - Number(menSel[2])}`
-            break
-        case "×":
-            var t = `${Number(menSel[0]) * Number(menSel[2])}`
-            break
-        case "÷":
-            var t = `${Number(menSel[0]) / Number(menSel[2])}`
-            break
-    }
-    res.innerHTML += `</br>${t}`
+function Responder(dadoResInt) {
+    setTimeout(() => {
+    let div = document.createElement('div')
+    div.setAttribute('class', 'recBac')
+    let p = document.createElement('p')
+    p.innerHTML = dadoResInt
+    div.appendChild(p)
+    section.appendChild(div)
+    Rolar()
+    dadoRes = ""
+}, 200);
 }
 //Essa Função Varre Todas As Palavras Chaves E Envia Uma Resposta Pré-Programada Ou Um Comando Pré-Programado
 function PalPro() {
     switch (menCon.toLowerCase()) {
+        case "//@":
+            vis = false
+            body.style = "background-color: red;"
+            vez = true
+            break
         //Esse Comando Exibe A Memória Interna Da Bot
         case "//memoria":
             if (vis == false) {
-                res.innerHTML += `</br></br>//Entradas</br>`
+                dadoRes += `</br></br>//Entradas</br>`
                 for (let pos in entradas) {
-                    res.innerHTML += `</br>let e${pos} = ["${entradas[pos]}"]`
+                    dadoRes += `</br>let e${pos} = ["${entradas[pos]}"]`
                 }
-                res.innerHTML += `</br></br>let ent = [`
+                dadoRes += `</br></br>let ent = [`
                 for (let pos in entradas) {
-                    res.innerHTML += `</br>e${pos},`
+                    dadoRes += `</br>e${pos},`
                 }
-                res.innerHTML += `</br>]`
-                res.innerHTML += `</br>for (let pos in ent) {
+                dadoRes += `</br>]`
+                dadoRes += `</br>for (let pos in ent) {
                 entradas.push(ent[pos])</br>
                 }`
-                res.innerHTML += `</br></br>//----------------------------------------------</br>`
-                res.innerHTML += `</br>//Saidas</br>`
+                dadoRes += `</br></br>//----------------------------------------------</br>`
+                dadoRes += `</br>//Saidas</br>`
                 for (let pos in saidas) {
-                    res.innerHTML += `</br>let s${pos} = ["${saidas[pos]}"]`
+                    dadoRes += `</br>let s${pos} = ["${saidas[pos]}"]`
                 }
-                res.innerHTML += `</br></br>let sai = [`
+                dadoRes += `</br></br>let sai = [`
                 for (let pos in saidas) {
-                    res.innerHTML += `</br>s${pos},`
+                    dadoRes += `</br>s${pos},`
                 }
-                res.innerHTML += `</br>]`
-                res.innerHTML += `</br>for (let pos in sai) {
+                dadoRes += `</br>]`
+                dadoRes += `</br>for (let pos in sai) {
                 saidas.push(sai[pos])</br>
                 }`
-                res.innerHTML += `</br>${saidas.length}`
-                res.innerHTML += `</br></br>//----------------------------------------------</br>`
-                res.innerHTML += `</br>//Vocabulário</br>`
+                dadoRes += `</br>${saidas.length}`
+                dadoRes += `</br></br>//----------------------------------------------</br>`
+                dadoRes += `</br>//Vocabulário</br>`
                 for (let pos in vocabulario) {
-                    res.innerHTML += `</br>"${vocabulario[pos]}",`
+                    dadoRes += `</br>"${vocabulario[pos]}",`
                 }
-                res.innerHTML += `</br></br>//----------------------------------------------</br>`
-                res.innerHTML += `</br>//Frases</br>`
+                dadoRes += `</br></br>//----------------------------------------------</br>`
+                dadoRes += `</br>//Frases</br>`
                 for (let pos in frases) {
-                    res.innerHTML += `</br>"${frases[pos]}",`
+                    dadoRes += `</br>"${frases[pos]}",`
                 }
                 vez = true
+                Responder(dadoRes)
             }
             //Esse Comando Limpa A Tela
             break
         case "//limpar":
-                res.innerHTML = ""
+                dadoRes = ""
+                alert("Função Indisponível")
                 vez = true
                 break
                 //esse Comando Cria Frases
@@ -794,12 +799,6 @@ function PalPro() {
                 if (vis == false) {
                     vez = true
                     CriFra()
-                }
-                break
-            default:
-                if (menSel[1] == "+" || menSel[1] == "-" || menSel[1] == "×" || menSel[1] == "÷") {
-                    vez = true
-                    Contar()
                 }
             }
             //Essa Função Varre As Entradas E Escolhe A Saida, Se Nenhuma For Encontrada, Ele Chama A Função Palavras Aleatórias
@@ -813,7 +812,8 @@ function PalPro() {
                             if (sai.length != 1) {
                                 mat = Math.floor(Math.random() * sai.length)
                             }
-                            res.innerHTML += `</br>${sai[mat]}<`
+                            dadoRes += sai[mat]
+                            Responder(dadoRes)
                         } else {
                             AdiSai()
                             function AdiSai () {
@@ -823,8 +823,9 @@ function PalPro() {
                                 let sen = window.confirm(`${tex}, Isso faz Sentido?`)
                                 if (sen == true) {
                                     sai.push(tex)
-                                    res.innerHTML += `</br>${tex}<`
+                                    dadoRes += tex
                                     vez = true
+                                    Responder(dadoRes)
                                 } else {
                                     AdiSai()
                                 }
@@ -886,8 +887,9 @@ function PalPro() {
                 var sa = []
                 sa.push(tex)
                 saidas.push(sa)
-                res.innerHTML += `</br>${tex}<`
+                dadoRes += tex
                 vez = true
+                Responder(dadoRes)
             } else {
                 FraAle(tent, true, true, ran)
             }
@@ -907,14 +909,16 @@ function PalPro() {
                         vocabulario.push(menSep[pos])
                     }
                 }
-                res.innerHTML += `</br>${tex}<`
+                dadoRes += tex
+                vez = true
+                Responder(dadoRes)
             }
             vez = true
         }
     }
     //Essa Função Adiciona Todas As Frases E Todas As Palavras A Array Vocabulário
     function Voc() {
-        if (menCon != "//memoria" && menCon != "//limpar" && menCon != "//criarfrases" && menSel[1] != "+" && menSel[1] != "-" && menSel[1] != "×" && menSel[1] != "÷") {
+        if (menCon != "//memoria" && menCon != "//@" && menCon != "//limpar" && menCon != "//criarfrases" && menSel[1] != "+" && menSel[1] != "-" && menSel[1] != "×" && menSel[1] != "÷") {
             if (frases.indexOf(menCon) == -1) {
                 frases.push(menCon)
             }
@@ -939,10 +943,11 @@ function PalPro() {
         }while (frases.indexOf(fra) != -1)
             let sent = window.confirm(`${fra}(Isso Faz Sentido?)`)
         if (sent == true) {
-            res.innerHTML += `</br>${fra}>`
+            dadoRes += fra
             frases.push(fra)
+            Responder(dadoRes)
         } else {
             CriFra()
         }
     }
-    */
+    
