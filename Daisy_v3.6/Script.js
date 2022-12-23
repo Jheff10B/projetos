@@ -735,14 +735,19 @@ function Responder(dadoResInt) {
     section.appendChild(div)
     Rolar()
     dadoRes = ""
-}, 200);
+}, 200);S
 }
 //Essa Função Varre Todas As Palavras Chaves E Envia Uma Resposta Pré-Programada Ou Um Comando Pré-Programado
 function PalPro() {
     switch (menCon.toLowerCase()) {
         case "//@":
-            vis = false
-            body.style = "background-color: red;"
+            if (vis == false) {
+                vis = true
+                body.style = "background-color: #00C1FF;"
+            }else {
+                vis = false
+                body.style = "background-color: red;"
+            }
             vez = true
             break
         //Esse Comando Exibe A Memória Interna Da Bot
