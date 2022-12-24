@@ -2,11 +2,11 @@
 // (27/10/2021)
 // Dia Que Eu Terminei Ela
 // undefined
-document.addEventListener('keypress', function(e){
-    if(e.which == 13){
-      Enviar();
+document.addEventListener('keypress', function (e) {
+    if (e.which == 13) {
+        Enviar();
     }
-  }, false);
+}, false);
 var topo = document.getElementById("topo")
 var section = document.getElementsByTagName("section")[0]
 var men = document.getElementById("mensagem")
@@ -617,8 +617,8 @@ Unir()
 Carregar()
 Rolar()
 function Rolar() {
-let height = body.scrollHeight
-scrollTo(0, height)
+    let height = body.scrollHeight
+    scrollTo(0, height)
 }
 //Essa Função Envia A Mensagem Para A Bot
 function Enviar() {
@@ -627,15 +627,15 @@ function Enviar() {
     Reformatar()
     if (menCon.length > 0) {
         vez = false
-		let div = document.createElement('div')
-		div.setAttribute('class', 'envBac')
-		let p = document.createElement('p')
-		p.innerHTML = men.value
-		div.appendChild(p)
-		section.appendChild(div)
+        let div = document.createElement('div')
+        div.setAttribute('class', 'envBac')
+        let p = document.createElement('p')
+        p.innerHTML = men.value
+        div.appendChild(p)
+        section.appendChild(div)
         men.value = ""
         men.focus()
-        setTimeout(function() {
+        setTimeout(function () {
             Voc()
             PalPro()
             Rolar()
@@ -653,7 +653,7 @@ function Reformatar() {
     }
     for (let pos in menSel) {
         menCon += menSel[pos]
-        if (pos < (menSel.length -1)) {
+        if (pos < (menSel.length - 1)) {
             menCon += " "
         }
     }
@@ -727,15 +727,15 @@ function Carregar() {
 }
 function Responder(dadoResInt) {
     setTimeout(() => {
-    let div = document.createElement('div')
-    div.setAttribute('class', 'recBac')
-    let p = document.createElement('p')
-    p.innerHTML = dadoResInt
-    div.appendChild(p)
-    section.appendChild(div)
-    Rolar()
-    dadoRes = ""
-}, 200);S
+        let div = document.createElement('div')
+        div.setAttribute('class', 'recBac')
+        let p = document.createElement('p')
+        p.innerHTML = dadoResInt
+        div.appendChild(p)
+        section.appendChild(div)
+        Rolar()
+        dadoRes = ""
+    }, 200); S
 }
 //Essa Função Varre Todas As Palavras Chaves E Envia Uma Resposta Pré-Programada Ou Um Comando Pré-Programado
 function PalPro() {
@@ -744,7 +744,7 @@ function PalPro() {
             if (vis == false) {
                 vis = true
                 body.style = "background-color: #00C1FF;"
-            }else {
+            } else {
                 vis = false
                 body.style = "background-color: red;"
             }
@@ -795,164 +795,163 @@ function PalPro() {
             //Esse Comando Limpa A Tela
             break
         case "//limpar":
-                dadoRes = ""
-                alert("Função Indisponível")
+            dadoRes = ""
+            alert("Função Indisponível")
+            vez = true
+            break
+        //esse Comando Cria Frases
+        case "//criarfrases":
+            if (vis == false) {
                 vez = true
-                break
-                //esse Comando Cria Frases
-            case "//criarfrases":
-                if (vis == false) {
-                    vez = true
-                    CriFra()
-                }
+                CriFra()
             }
-            //Essa Função Varre As Entradas E Escolhe A Saida, Se Nenhuma For Encontrada, Ele Chama A Função Palavras Aleatórias
-            for (let pos in entradas) {
-                var ent = entradas[pos]
-                for (var p in ent) {
-                    var sai = saidas[pos]
-                    if (menCon.toLowerCase() == ent[p] && vez == false) {
-                        if (vis == true) {
-                            var mat = 0
-                            if (sai.length != 1) {
-                                mat = Math.floor(Math.random() * sai.length)
-                            }
-                            dadoRes += sai[mat]
+    }
+    //Essa Função Varre As Entradas E Escolhe A Saida, Se Nenhuma For Encontrada, Ele Chama A Função Palavras Aleatórias
+    for (let pos in entradas) {
+        var ent = entradas[pos]
+        for (var p in ent) {
+            var sai = saidas[pos]
+            if (menCon.toLowerCase() == ent[p] && vez == false) {
+                if (vis == true) {
+                    var mat = 0
+                    if (sai.length != 1) {
+                        mat = Math.floor(Math.random() * sai.length)
+                    }
+                    dadoRes += sai[mat]
+                    Responder(dadoRes)
+                } else {
+                    AdiSai()
+                    function AdiSai() {
+                        let tex = ""
+                        let ale = Math.floor(Math.random() * frases.length)
+                        tex += ` ${frases[ale]}`
+                        let sen = window.confirm(`${tex}, Isso faz Sentido?`)
+                        if (sen == true) {
+                            sai.push(tex)
+                            dadoRes += tex
+                            vez = true
                             Responder(dadoRes)
                         } else {
                             AdiSai()
-                            function AdiSai () {
-                                let tex = ""
-                                let ale = Math.floor(Math.random() * frases.length)
-                                tex += ` ${frases[ale]}`
-                                let sen = window.confirm(`${tex}, Isso faz Sentido?`)
-                                if (sen == true) {
-                                    sai.push(tex)
-                                    dadoRes += tex
-                                    vez = true
-                                    Responder(dadoRes)
-                                } else {
-                                    AdiSai()
-                                }
-                            }
-                        }
-                        vez = true
-                    }
-                }
-            }
-            if (vez == false) {
-                FraAle([], window.confirm("Quer Tentar Uma Resposta Aleatória?"), false, 0)
-            }
-    }
-    //Se A Frase Recebida Não Foi Pré-Programada Ela Envia Uma Frase Aleatória
-    function FraAle(tent, confi, tentati, ran) {
-        if (vez == false && tent.length +1 <= frases.length && confi == true) {
-            let tex = ""
-            let entTes = []
-            if (tent.length <= (frases.length / 10)) {
-                for (let pos in entradas) {
-                    let palEnc = 0
-                    let menSep = menCon.split(" ")
-                    for (let po in menSep) {
-                        let reEx = RegExp(`${menSep[po]}`, "gi")
-                        let teste = reEx.test(entradas[pos])
-                        if (teste == true) {
-                            palEnc++
                         }
                     }
-                    entTes.push(palEnc)
                 }
-                for (let pos in entTes) {
-                    if (entTes[ran] < entTes[pos]) {
-                        ran = pos
-                    }
-                    if (tent.indexOf(ran) != -1) {
-                        entTes[ran] = -1
-                    }
-                    if ((saidas[ran]).length > 1) {
-                        let numAle = Math.floor(Math.random() * (saidas[ran]).length)
-                        tex = (saidas[ran])[numAle]
-                    } else {
-                        tex = saidas[ran]
-                    }
-                }
-            } else {
-                do {
-                    ran = Math.floor(Math.random() * frases.length)
-                } while (tent.indexOf(ran) != -1)
-                    tex = frases[ran]
-            }
-
-            tent.push(ran)
-            let sen = window.confirm(`${tex} (Isso faz Sentido?)[${ran}]`)
-            if (sen == true) {
-                var en = []
-                en.push(menCon)
-                entradas.push(en)
-                var sa = []
-                sa.push(tex)
-                saidas.push(sa)
-                dadoRes += tex
                 vez = true
-                Responder(dadoRes)
-            } else {
-                FraAle(tent, true, true, ran)
             }
-        } else if (vez == false) {
-            let tex = window.prompt(`${menCon} (Digite Uma Resposta)`)
-            if (tex.length > 0) {
-                var en = []
-                en.push(menCon)
-                entradas.push(en)
-                var sa = []
-                sa.push(tex)
-                saidas.push(sa)
-                frases.push(tex)
-                let menSep = tex.split(" ")
-                for (let pos in menSep) {
-                    if (vocabulario.push(menSep[pos]) == -1) {
-                        vocabulario.push(menSep[pos])
-                    }
-                }
-                dadoRes += tex
-                vez = true
-                Responder(dadoRes)
-            }
-            vez = true
         }
     }
-    //Essa Função Adiciona Todas As Frases E Todas As Palavras A Array Vocabulário
-    function Voc() {
-        if (menCon != "//memoria" && menCon != "//@" && menCon != "//limpar" && menCon != "//criarfrases" && menSel[1] != "+" && menSel[1] != "-" && menSel[1] != "×" && menSel[1] != "÷") {
-            if (frases.indexOf(menCon) == -1) {
-                frases.push(menCon)
+    if (vez == false) {
+        FraAle([], window.confirm("Quer Tentar Uma Resposta Aleatória?"), false, 0)
+    }
+}
+//Se A Frase Recebida Não Foi Pré-Programada Ela Envia Uma Frase Aleatória
+function FraAle(tent, confi, tentati, ran) {
+    if (vez == false && tent.length + 1 <= frases.length && confi == true) {
+        let tex = ""
+        let entTes = []
+        if (tent.length <= (frases.length / 10)) {
+            for (let pos in entradas) {
+                let palEnc = 0
+                let menSep = menCon.split(" ")
+                for (let po in menSep) {
+                    let reEx = RegExp(`${menSep[po]}`, "gi")
+                    let teste = reEx.test(entradas[pos])
+                    if (teste == true) {
+                        palEnc++
+                    }
+                }
+                entTes.push(palEnc)
             }
-            let menSep = menCon.toLowerCase().split(" ")
+            for (let pos in entTes) {
+                if (entTes[ran] < entTes[pos]) {
+                    ran = pos
+                }
+                if (tent.indexOf(ran) != -1) {
+                    entTes[ran] = -1
+                }
+                if ((saidas[ran]).length > 1) {
+                    let numAle = Math.floor(Math.random() * (saidas[ran]).length)
+                    tex = (saidas[ran])[numAle]
+                } else {
+                    tex = saidas[ran]
+                }
+            }
+        } else {
+            do {
+                ran = Math.floor(Math.random() * frases.length)
+            } while (tent.indexOf(ran) != -1)
+            tex = frases[ran]
+        }
+
+        tent.push(ran)
+        let sen = window.confirm(`${tex} (Isso faz Sentido?)[${ran}]`)
+        if (sen == true) {
+            var en = []
+            en.push(menCon)
+            entradas.push(en)
+            var sa = []
+            sa.push(tex)
+            saidas.push(sa)
+            dadoRes += tex
+            vez = true
+            Responder(dadoRes)
+        } else {
+            FraAle(tent, true, true, ran)
+        }
+    } else if (vez == false) {
+        let tex = window.prompt(`${menCon} (Digite Uma Resposta)`)
+        if (tex.length > 0) {
+            var en = []
+            en.push(menCon)
+            entradas.push(en)
+            var sa = []
+            sa.push(tex)
+            saidas.push(sa)
+            frases.push(tex)
+            let menSep = tex.split(" ")
             for (let pos in menSep) {
                 if (vocabulario.push(menSep[pos]) == -1) {
                     vocabulario.push(menSep[pos])
                 }
             }
-        }
-    }
-    //Essa Função Cria Frases Com Palavras Aleatórias
-    function CriFra() {
-        do {
-            var tam = Math.floor(Math.random() * 9)+1
-            var fra = ""
-            while (tam >= 1) {
-                let el = Math.floor(Math.random() * vocabulario.length)
-                fra += `${vocabulario[el]} `
-                tam--
-            }
-        }while (frases.indexOf(fra) != -1)
-            let sent = window.confirm(`${fra}(Isso Faz Sentido?)`)
-        if (sent == true) {
-            dadoRes += fra
-            frases.push(fra)
+            dadoRes += tex
+            vez = true
             Responder(dadoRes)
-        } else {
-            CriFra()
+        }
+        vez = true
+    }
+}
+//Essa Função Adiciona Todas As Frases E Todas As Palavras A Array Vocabulário
+function Voc() {
+    if (menCon != "//memoria" && menCon != "//@" && menCon != "//limpar" && menCon != "//criarfrases" && menSel[1] != "+" && menSel[1] != "-" && menSel[1] != "×" && menSel[1] != "÷") {
+        if (frases.indexOf(menCon) == -1) {
+            frases.push(menCon)
+        }
+        let menSep = menCon.toLowerCase().split(" ")
+        for (let pos in menSep) {
+            if (vocabulario.push(menSep[pos]) == -1) {
+                vocabulario.push(menSep[pos])
+            }
         }
     }
-    
+}
+//Essa Função Cria Frases Com Palavras Aleatórias
+function CriFra() {
+    do {
+        var tam = Math.floor(Math.random() * 9) + 1
+        var fra = ""
+        while (tam >= 1) {
+            let el = Math.floor(Math.random() * vocabulario.length)
+            fra += `${vocabulario[el]} `
+            tam--
+        }
+    } while (frases.indexOf(fra) != -1)
+    let sent = window.confirm(`${fra}(Isso Faz Sentido?)`)
+    if (sent == true) {
+        dadoRes += fra
+        frases.push(fra)
+        Responder(dadoRes)
+    } else {
+        CriFra()
+    }
+}

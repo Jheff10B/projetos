@@ -1,32 +1,39 @@
 @charset 'UTF-8';
+
 * {
 	font-family: Arial "Sans-Serif";
 	font-size: 1em;
 	margin: 0px;
 	padding: 0px;
 }
+
 body {
 	font-family: arial;
 	background-color: #00C1FF;
 	text-align: center;
 }
+
 section {
 	min-height: 86.5vh;
 	max-width: 600px;
 	margin: auto;
 }
+
 section div {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+
 section div.recBac {
 	display: block;
 	text-align: left;
 }
+
 section div.envBac {
 	display: block;
 	text-align: right;
 }
+
 section p {
 	background-color: white;
 	border-radius: 0.8em;
@@ -36,13 +43,16 @@ section p {
 	max-width: 85%;
 	padding: 10px;
 }
+
 section div.envBac p {
 	background-color: #B5F2FF;
 	margin-right: 10px;
 }
+
 section div.recBac p {
 	margin-left: 10px;
 }
+
 input#mensagem {
 	border-radius: 1.4em;
 	border-style: none;
@@ -53,6 +63,7 @@ input#mensagem {
 	width: 80%;
 	max-width: 508px;
 }
+
 input#enviar {
 	background-color: white;
 	border-radius: 50%;
@@ -60,4 +71,20 @@ input#enviar {
 	height: 3em;
 	margin-left: 2%;
 	width: 3em;
+}
+
+div#MensManuBack {
+	background-color: #00C1FF;
+	height: 100%;
+	font-size: 8em;
+	position: fixed;
+	width: 100%;
+}
+
+div#MensManu {
+	margin-top: 20%;
+}
+
+div#MensManu>p {
+	font-size: 0.2em;
 }
