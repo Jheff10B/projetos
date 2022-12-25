@@ -8,15 +8,26 @@
 }
 
 body {
-	font-family: arial;
+	font-family: Arial;
 	background-color: #00C1FF;
 	text-align: center;
+}
+
+div#barFer {
+	background-color: #006688;
+	color: white;
+	font-weight: bold;
+	height: 25px;
+	line-height: 25px;
+	position: fixed;
+	width: 100vw;
 }
 
 section {
 	min-height: 86.5vh;
 	max-width: 600px;
 	margin: auto;
+	padding: 25px 0 52px 0;
 }
 
 section div {
@@ -56,21 +67,26 @@ section div.recBac p {
 input#mensagem {
 	border-radius: 1.4em;
 	border-style: none;
-	height: 3em;
+	height: 2.5em;
 	text-align: center;
 	margin-bottom: 15px;
-	margin-top: 10px;
-	width: 80%;
-	max-width: 508px;
+	padding: 0px 13px 0px 13px;
+	width: 75%;
 }
 
 input#enviar {
 	background-color: white;
 	border-radius: 50%;
 	border-style: none;
-	height: 3em;
-	margin-left: 2%;
-	width: 3em;
+	height: 2.5em;
+	margin-left: 1.8%;
+	width: 2.5em;
+}
+
+div.botoBack {
+	bottom: -10px;
+	position: fixed;
+	width: 100%;
 }
 
 div#MensManuBack {
@@ -78,7 +94,7 @@ div#MensManuBack {
 	height: 100%;
 	font-size: 8em;
 	position: fixed;
-	width: 100%;
+	width: 100vw;
 }
 
 div#MensManu {
