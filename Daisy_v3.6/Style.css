@@ -92,15 +92,20 @@ div.botoBack {
 div#MensManuBack {
 	background-color: #00C1FF;
 	height: 100%;
-	font-size: 8em;
-	position: fixed;
+	font-size: 10em;
+	position: absolute;
 	width: 100vw;
 }
 
 div#MensManu {
-	margin-top: 20%;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+
 }
 
 div#MensManu>p {
-	font-size: 0.2em;
+	font-size: 0.15em;
 }
